@@ -139,7 +139,7 @@ public class Args {
 	private void setStringArg(char argChar) throws ArgsException {
 		currentArgument++;
 		try {
-			stringArgs.get(argChar).getString(args[currentArgument]);
+			stringArgs.get(argChar).set(args[currentArgument]);
 		} catch (ArrayIndexOutOfBoundsException e) {
 			valid = false;
 			errorArgument = argChar;
@@ -153,7 +153,7 @@ public class Args {
 		String parameter = null;
 		try {
 			parameter = args[currentArgument];
-			intArgs.get(argChar).setInteger(Integer.parseInt(args[currentArgument]));
+			intArgs.get(argChar).set(parameter);
 		} catch (ArrayIndexOutOfBoundsException e) {
 			valid = false;
 			errorArgument = argChar;
@@ -172,8 +172,8 @@ public class Args {
 		return stringArgs.containsKey(argChar);
 	}
 
-	private void setBooleanArg(char argChar, boolean value) {
-		booleanArgs.get(argChar).setBoolean(value);
+	private void setBooleanArg(char argChar, boolean value) throws ArgsException {
+		booleanArgs.get(argChar).set("true");
 	}
 
 	private boolean isBoolean(char argChar) {
@@ -222,18 +222,18 @@ public class Args {
 
 	public boolean getBoolean(char arg) {
 		ArgumentMarshaler am = booleanArgs.get(arg);
-		return am != null && am.getBoolean();
+		return am != null && (Boolean)am.get();
 	}
 
 
 	public String getString(char arg) {
 		ArgumentMarshaler am = stringArgs.get(arg);
-		return am != null ? "" : am.getString();
+		return am != null ? "" : (String)am.get();
 	}
 
 	public int getInt(char arg) {
 		ArgumentMarshaler am = intArgs.get(arg);
-		return am == null ? 0 : am.getInteger();
+		return am == null ? 0 : (Integer) am.get();
 	}
 
 
