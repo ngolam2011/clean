@@ -1,15 +1,17 @@
 package com.ngolam.cleancode;
 
-public class BooleanArgumentMarshaler extends ArgumentMarshaler {
-	private boolean booleanValue = false;
-	@Override
-	public void set(String s) {
-	booleanValue = true;
-	}
+import java.util.Iterator;
 
-	@Override
+public class BooleanArgumentMarshaler implements ArgumentMarshaler {
+	private boolean booleanValue = false;
+
 	public Object get() {
 		return booleanValue;
+	}
+
+	public void set(Iterator<String> currentArgument) {
+		booleanValue = true;
+
 	}
 
 }

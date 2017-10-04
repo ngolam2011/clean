@@ -1,5 +1,7 @@
 package com.ngolam.cleancode;
 
+import com.ngolam.cleancode.Args.ErrorCode;
+
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -7,7 +9,7 @@ import junit.framework.TestSuite;
 /**
  * Unit test for simple App.
  */
-public class AppTest 
+public class AppTest
     extends TestCase
 {
     /**
@@ -31,8 +33,13 @@ public class AppTest
     /**
      * Rigourous Test :-)
      */
-    public void testApp()
+    public void testCreateWithNoSchemaOrArguments() throws Exception
     {
-        assertTrue( true );
+    	try {
+    		new Args("", new String[] {"-x"});
+    		fail();
+    	} catch (ArgsException e) {
+    		assertEquals(ErrorCode.UNEXPECTED_ARGUMENT, e.getMessage());
+    	}
     }
 }

@@ -1,8 +1,9 @@
 package com.ngolam.cleancode;
 
-public abstract class ArgumentMarshaler {
+import java.util.Iterator;
 
-	public abstract void set(String s) throws ArgsException;
-	public abstract Object get();
+public interface ArgumentMarshaler {
+	public void set(Iterator<String> currentArgument) throws ArgsException;
+	public Object get();
 }
 
